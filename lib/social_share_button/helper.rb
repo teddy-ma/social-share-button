@@ -6,15 +6,13 @@ module SocialShareButton
       extra_data = {}
       rel = opts[:rel]
       html = []
-      html << "<div class='social-share-button' data-title='#{h title}' data-img='#{opts[:image]}'"
+      html << "<div class='social-share-button ddd' data-title='#{h title}' data-img='#{opts[:image]}'"
       html << "data-url='#{opts[:url]}' data-desc='#{opts[:desc]}' data-via='#{opts[:via]}'>"
-
+      html << "<span>share</span>"
       opts[:allow_sites].each do |name|
         extra_data = opts.select { |k, _| k.to_s.start_with?('data') } if name.eql?('tumblr')
         special_data = opts.select { |k, _| k.to_s.start_with?('data-' + name) }
-        
         special_data["data-wechat-footer"] = t "social_share_button.wechat_footer" if name == "wechat"
-
         link_title = t "social_share_button.share_to", :name => t("social_share_button.#{name.downcase}")
         html << link_to("", "#", { :rel => ["nofollow", rel],
                                    "data-site" => name,
